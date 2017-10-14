@@ -17,6 +17,7 @@ public class GeoActivity extends Activity {
         LocationListener listener = new LocationListener() {
             public void onLocationChanged(Location location) {
                 // when location changes
+
             }
 
             public void onStatusChanged(String provider, int status, Bundle extras) {
