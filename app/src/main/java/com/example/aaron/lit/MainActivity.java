@@ -6,6 +6,8 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
+    protected drawMap screenmap;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -16,6 +18,43 @@ public class MainActivity extends AppCompatActivity {
     tv.setText(stringFromJNI());
     }
 
+    /** Called when the activity is about to become visible. */
+    @Override
+    protected void onStart(){
+        super.onStart();
+        screenmap = new drawMap();
+    }
+
+    /** Called when the activity has become visible. */
+    @Override
+    protected void onResume(){
+        super.onResume();
+
+    }
+
+    /** Called when another activity is taking focus. */
+    @Override
+    protected void onStop(){
+        super.onStop();
+    }
+
+    /** Called when the activity is no longer visible. */
+    @Override
+    protected void onPause(){
+        super.onPause();
+    }
+
+    /** Called just before the activity is destroyed. */
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+    }
+
+
+    @Override
+    protected void onRestart(){
+        super.onRestart();
+    }
     /**
      * A native method that is implemented by the 'native-lib' native library,
      * which is packaged with this application.
