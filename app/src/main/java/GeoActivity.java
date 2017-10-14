@@ -5,10 +5,10 @@ import android.content.Context;
  * Created by Aaron on 10/13/17.
  */
 
-public class GeoActivity extends Activity {
+public class GeoService extends Service{
 
     // some constructor
-    public GeoActivity() {
+    public GeoService() {
     }
     boolean provider_status;
     Location loc;
@@ -41,6 +41,11 @@ public class GeoActivity extends Activity {
 
         // update location every 5 seconds with a 1 meter change in position
         locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 5000, 1, locationListener);
+        if (loc.getAccuracy() < 2)
+            loc_manager.removeUpdates(listener);
+    }
+    public Location returnLoc() {
+        return loc;
     }
     private boolean isBetterLocation(Location location, Location current_loc) {
         if (current_loc == null)
