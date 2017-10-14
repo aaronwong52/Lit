@@ -6,7 +6,7 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-    protected drawMap screenmap;
+//    protected drawMap screenmap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart(){
         super.onStart();
-        screenmap = new drawMap();
+  //      screenmap = new drawMap();
     }
 
     /** Called when the activity has become visible. */
@@ -51,7 +51,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onDestroy(){
         super.onDestroy();
     }
-
 
     /**
      * A native method that is implemented by the 'native-lib' native library,

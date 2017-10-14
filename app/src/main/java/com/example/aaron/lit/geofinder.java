@@ -1,3 +1,5 @@
+package com.example.aaron.lit;
+
 import android.Manifest;
 import android.app.Service;
 import android.content.Context;
@@ -10,7 +12,6 @@ import android.os.Binder;
 import android.os.IBinder;
 import android.content.Intent;
 import android.support.v4.app.ActivityCompat;
-import android.widget.Toast;
 
 /**
  * Created by Aaron on 10/13/17.
