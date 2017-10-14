@@ -1,14 +1,32 @@
-import android.app.Activity;
+import android.app.Service;
 import android.content.Context;
+import android.location.Location;
+import android.location.LocationManager;
+import android.location.LocationListener;
+import android.os.Bundle;
+import android.os.Binder;
+import android.os.IBinder;
+import android.content.Intent;
+import android.widget.Toast;
 
 /**
  * Created by Aaron on 10/13/17.
  */
 
-public class GeoService extends Service{
+public class geofinder extends Service {
 
+    @Override
+    public IBinder onBind(Intent intent) {
+        return mBinder;
+    }
+    public class LocalBinder extends Binder {
+        geofinder getService() {
+            return geofinder.this;
+        }
+    }
+    private final IBinder mBinder = new LocalBinder();
     // some constructor
-    public GeoService() {
+    public geofinder() {
     }
     boolean provider_status;
     Location loc;
@@ -40,7 +58,7 @@ public class GeoService extends Service{
         };
 
         // update location every 5 seconds with a 1 meter change in position
-        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 5000, 1, locationListener);
+        loc_manager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 5000, 1, listener);
         if (loc.getAccuracy() < 2)
             loc_manager.removeUpdates(listener);
     }
@@ -51,7 +69,7 @@ public class GeoService extends Service{
         if (current_loc == null)
             return true;
         float time_diff = location.getTime() - current_loc.getTime();
-        int accuracy_diff = (int) location.getAccuracy() - current_loc.getAccuracy();
+        float accuracy_diff = location.getAccuracy() - current_loc.getAccuracy();
         boolean moreAccurate = false;
         boolean newer = false;
         if (time_diff > 0)
@@ -60,5 +78,6 @@ public class GeoService extends Service{
             moreAccurate = true;
         if (newer && moreAccurate)
             return true;
+        else return false;
     }
 }
