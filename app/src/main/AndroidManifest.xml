@@ -21,7 +21,9 @@
 
         <activity android:name=".integrateMaps">
         </activity>
-
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyC1V5tptk2K7_94Utvs3gDAWS_O8WoGSbE"/>
         <service android:name=".geofinder" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
