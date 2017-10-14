@@ -31,12 +31,13 @@ public class geofinder extends Service
     private class LocationListener implements android.location.LocationListener
     {
         Location mLastLocation;
-        Marker CurrentMarker;
         GoogleMap map;
+        Marker CurrentMarker;
 
         public LocationListener(String provider)
         {
             Log.e(TAG, "LocationListener " + provider);
+
             mLastLocation = new Location(provider);
         }
 
@@ -54,7 +55,6 @@ public class geofinder extends Service
             markeroptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
             CurrentMarker = map.addMarker(markeroptions);
             map.moveCamera(CameraUpdateFactory.newLatLngZoom(latlng, 11));
-
         }
 
         @Override
