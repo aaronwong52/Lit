@@ -1,5 +1,7 @@
+import android.Manifest;
 import android.app.Service;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
 import android.location.LocationListener;
@@ -7,6 +9,7 @@ import android.os.Bundle;
 import android.os.Binder;
 import android.os.IBinder;
 import android.content.Intent;
+import android.support.v4.app.ActivityCompat;
 import android.widget.Toast;
 
 /**
@@ -19,17 +22,22 @@ public class geofinder extends Service {
     public IBinder onBind(Intent intent) {
         return mBinder;
     }
+
     public class LocalBinder extends Binder {
         geofinder getService() {
             return geofinder.this;
         }
     }
+
     private final IBinder mBinder = new LocalBinder();
+
     // some constructor
     public geofinder() {
     }
+
     boolean provider_status;
     Location loc;
+
     // initialize location things
     public void updateLocation() {
         final LocationManager loc_manager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
@@ -37,6 +45,16 @@ public class geofinder extends Service {
             public void onLocationChanged(Location location) {
                 // when location changes
                 String locationProvider = LocationManager.NETWORK_PROVIDER;
+                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                    // TODO: Consider calling
+                    //    ActivityCompat#requestPermissions
+                    // here to request the missing permissions, and then overriding
+                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                    //                                          int[] grantResults)
+                    // to handle the case where the user grants the permission. See the documentation
+                    // for ActivityCompat#requestPermissions for more details.
+                    return;
+                }
                 location = loc_manager.getLastKnownLocation(locationProvider);
                 if (isBetterLocation(location, loc))
                     loc = location;
